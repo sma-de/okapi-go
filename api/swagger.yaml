@@ -1,0 +1,2564 @@
+openapi: 3.0.1
+info:
+  title: oKaPIBackend API
+  description: oKaPIBackend API documentation
+  termsOfService: ""
+  contact:
+    name: SMA Solar Technology
+    url: https://www.sma.de/
+    email: software@sma.de
+  license:
+    name: Proprietary software
+    url: https://manuals.sma.de/SPortal/en-US/839268235.html
+  version: 6.3.1
+servers:
+- url: https://okapi.sma.dev
+  description: Generated server url
+security:
+- oauth:
+  - read
+  - write
+paths:
+  /api/kpi/products:
+    get:
+      tags:
+      - product-resource
+      operationId: getAllProducts
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDto'
+                x-content-type: '*/*'
+    put:
+      tags:
+      - product-resource
+      operationId: updateProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+    post:
+      tags:
+      - product-resource
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+    patch:
+      tags:
+      - product-resource
+      operationId: partialUpdateProduct
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProductDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+  /api/kpi/product-releases:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getAllProductReleases
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductReleaseDto'
+                x-content-type: '*/*'
+    put:
+      tags:
+      - product-release-resource
+      operationId: updateProductRelease
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductReleaseDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+    post:
+      tags:
+      - product-release-resource
+      operationId: createProductRelease
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductReleaseDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+    patch:
+      tags:
+      - product-release-resource
+      operationId: partialUpdateProductRelease
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProductReleaseDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+  /api/kpi/modules:
+    get:
+      tags:
+      - module-resource
+      operationId: getAllModules
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleDto'
+                x-content-type: '*/*'
+    put:
+      tags:
+      - module-resource
+      operationId: updateModule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleDto'
+    post:
+      tags:
+      - module-resource
+      operationId: createModule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleDto'
+    patch:
+      tags:
+      - module-resource
+      operationId: partialUpdateModule
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/ModuleDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleDto'
+  /api/kpi/module-versions:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getAllModuleVersions
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+    put:
+      tags:
+      - module-version-resource
+      operationId: updateModuleVersion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleVersionDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+    post:
+      tags:
+      - module-version-resource
+      operationId: createModuleVersion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleVersionDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+    patch:
+      tags:
+      - module-version-resource
+      operationId: partialUpdateModuleVersion
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/ModuleVersionDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+  /api/logout:
+    post:
+      tags:
+      - logout-resource
+      operationId: logout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OidcIdToken'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                x-content-type: '*/*'
+  /api/login:
+    post:
+      tags:
+      - login-resource
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequestDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                x-content-type: '*/*'
+  /api/kpi/reset/kpi/product:
+    post:
+      tags:
+      - util-resource
+      operationId: resetProductKpi
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDto'
+                x-content-type: '*/*'
+  /api/kpi/reset/kpi/module:
+    post:
+      tags:
+      - util-resource
+      operationId: resetModuleKpi
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+  /api/kpi/reload/release-manager-status:
+    post:
+      tags:
+      - util-resource
+      operationId: reloadReleaseManagerStatus
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductReleaseDto'
+                x-content-type: '*/*'
+  /api/kpi/reload/metrics/product-release/{productReleaseId}:
+    post:
+      tags:
+      - util-resource
+      operationId: reloadProductReloadMetrics
+      parameters:
+      - name: productReleaseId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+  /api/kpi/reload/metrics/module-version/{moduleVersionId}:
+    post:
+      tags:
+      - util-resource
+      operationId: reloadModuleVersionMetrics
+      parameters:
+      - name: moduleVersionId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+  /api/kpi/modules/merge/{fromId}/{intoId}:
+    post:
+      tags:
+      - module-resource
+      operationId: mergeModules
+      parameters:
+      - name: fromId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: intoId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleDto'
+  /api/kpi/import/product-release:
+    post:
+      tags:
+      - import-resource
+      operationId: importProductRelease
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductReleaseImportDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+  /api/kpi/import/module-version:
+    post:
+      tags:
+      - import-resource
+      operationId: importModuleVersion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleVersionImportDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+  /api/kpi/products/{id}:
+    get:
+      tags:
+      - product-resource
+      operationId: getProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+    delete:
+      tags:
+      - product-resource
+      operationId: deleteProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+  /api/kpi/products/tags:
+    get:
+      tags:
+      - product-resource
+      operationId: productTags
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                x-content-type: '*/*'
+  /api/kpi/products/groups:
+    get:
+      tags:
+      - product-resource
+      operationId: productGroups
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                x-content-type: '*/*'
+  /api/kpi/products/by-name/{productName}:
+    get:
+      tags:
+      - product-resource
+      operationId: getProductByName
+      parameters:
+      - name: productName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+  /api/kpi/products/all:
+    get:
+      tags:
+      - product-resource
+      operationId: getAllProductsWithFlatInformation
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDto'
+                x-content-type: '*/*'
+  /api/kpi/product-releases/{id}:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getProductRelease
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+    delete:
+      tags:
+      - product-release-resource
+      operationId: deleteProductRelease
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+  /api/kpi/product-releases/pwned-note-keys:
+    get:
+      tags:
+      - product-release-resource
+      operationId: allPwnedNoteKeys
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - GENERAL
+                  - RELEASE_VERSION_USE_NON_RELEASE_VERSION
+                x-content-type: '*/*'
+  /api/kpi/product-releases/previous/{id}:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getPreviousModuleVersion
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: versionKind
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: ALL
+          enum:
+          - ALL
+          - VERSION_IN_ACTIVE_ROLLOUT
+          - R_VERSION
+          - S_VERSION
+          - A_B_VERSION
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+  /api/kpi/product-releases/latest:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getAllLatestProductReleases
+      parameters:
+      - name: versionKind
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: ALL
+          enum:
+          - ALL
+          - VERSION_IN_ACTIVE_ROLLOUT
+          - R_VERSION
+          - S_VERSION
+          - A_B_VERSION
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductReleaseDto'
+                x-content-type: '*/*'
+  /api/kpi/product-releases/latest/by-product/{productId}:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getLatestProductReleasesForProduct
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: versionKind
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: ALL
+          enum:
+          - ALL
+          - VERSION_IN_ACTIVE_ROLLOUT
+          - R_VERSION
+          - S_VERSION
+          - A_B_VERSION
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+  /api/kpi/product-releases/by-product/{productId}:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getAllProductReleasesForProduct
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductReleaseDto'
+                x-content-type: '*/*'
+  /api/kpi/product-releases/by-name/{productName}:
+    get:
+      tags:
+      - product-release-resource
+      operationId: getAllProductReleasesForProductName
+      parameters:
+      - name: productName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductReleaseDto'
+                x-content-type: '*/*'
+  /api/kpi/product-releases/by-name/{productName}/{revision}:
+    get:
+      tags:
+      - product-release-resource
+      operationId: geProductReleasesByName
+      parameters:
+      - name: productName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: revision
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductReleaseDto'
+  /api/kpi/modules/{id}:
+    get:
+      tags:
+      - module-resource
+      operationId: getModule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleDto'
+    delete:
+      tags:
+      - module-resource
+      operationId: deleteModule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+  /api/kpi/modules/tags:
+    get:
+      tags:
+      - module-resource
+      operationId: moduleTags
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                x-content-type: '*/*'
+  /api/kpi/modules/tag/{tag}:
+    get:
+      tags:
+      - module-resource
+      operationId: getAllModulesByTag
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleDto'
+                x-content-type: '*/*'
+  /api/kpi/modules/by-name/{moduleName}:
+    get:
+      tags:
+      - module-resource
+      operationId: getModuleByName
+      parameters:
+      - name: moduleName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleDto'
+  /api/kpi/modules/all:
+    get:
+      tags:
+      - module-resource
+      operationId: getAllModulesWithFlatInformation
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleDto'
+                x-content-type: '*/*'
+  /api/kpi/module-versions/{id}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getModuleVersionAndCalculatedKpi
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+    delete:
+      tags:
+      - module-version-resource
+      operationId: deleteModuleVersion
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+  /api/kpi/module-versions/previous/{id}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getPreviousModuleVersion_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+  /api/kpi/module-versions/latest:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getLatestModuleVersionsForModule
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+  /api/kpi/module-versions/latest/by-module/{moduleId}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getLatestModuleVersionsForModule_1
+      parameters:
+      - name: moduleId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+  /api/kpi/module-versions/by-product-release/{productReleaseId}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getAllModuleVersionsForProductRelease
+      parameters:
+      - name: productReleaseId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+  /api/kpi/module-versions/by-name/{moduleName}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getAllModuleVersionsForModuleName
+      parameters:
+      - name: moduleName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+  /api/kpi/module-versions/by-module/{moduleName}/{revision}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getModuleVersionForModuleNameWithRevision
+      parameters:
+      - name: moduleName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: revision
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModuleVersionDto'
+  /api/kpi/module-versions/by-module/{moduleId}:
+    get:
+      tags:
+      - module-version-resource
+      operationId: getAllModuleVersionsForModule
+      parameters:
+      - name: moduleId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleVersionDto'
+                x-content-type: '*/*'
+  /api/kpi/map-product-groups:
+    get:
+      tags:
+      - util-resource
+      operationId: mapProductGroups
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDto'
+                x-content-type: '*/*'
+  /api/kpi/ip:
+    get:
+      tags:
+      - util-resource
+      operationId: getIp
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                x-content-type: '*/*'
+  /api/kpi/force-import:
+    get:
+      tags:
+      - util-resource
+      operationId: importDashDate
+      responses:
+        "200":
+          description: OK
+  /api/kpi/dash/sonar:
+    get:
+      tags:
+      - util-resource
+      operationId: dashSonar
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SonarDto'
+  /api/kpi/dash/ping:
+    get:
+      tags:
+      - util-resource
+      operationId: dashPing
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PingDto'
+  /api/kpi/badge/{badge}:
+    get:
+      tags:
+      - util-resource
+      operationId: getBadge
+      parameters:
+      - name: badge
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+                x-content-type: '*/*'
+  /api/kpi/badge/product/{productName}/{productVersion}:
+    get:
+      tags:
+      - util-resource
+      operationId: getBadgeForProductVersion
+      parameters:
+      - name: productName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: productVersion
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+                x-content-type: '*/*'
+  /api/kpi/badge/product/by-susy/{susyId}/{productVersion}:
+    get:
+      tags:
+      - util-resource
+      operationId: getBadgeForProductVersion_1
+      parameters:
+      - name: susyId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: productVersion
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+                x-content-type: '*/*'
+  /api/kpi/badge/module/{moduleName}/{moduleVersion}:
+    get:
+      tags:
+      - util-resource
+      operationId: getBadgeForModuleVersion
+      parameters:
+      - name: moduleName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: moduleVersion
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+                x-content-type: '*/*'
+  /api/auth-info:
+    get:
+      tags:
+      - auth-info-resource
+      operationId: authInfo
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthInfoVM'
+  /api/admin/users:
+    get:
+      tags:
+      - user-resource
+      operationId: getAllUsers
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminUserDto'
+                x-content-type: '*/*'
+  /api/admin/users/{login}:
+    get:
+      tags:
+      - user-resource
+      operationId: getUser
+      parameters:
+      - name: login
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminUserDto'
+  /api/account:
+    get:
+      tags:
+      - account-resource
+      operationId: getAccount
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminUserDto'
+components:
+  schemas:
+    ProductDto:
+      type: object
+      properties:
+        id:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+        createUser:
+          type: string
+        lastModifiedTime:
+          type: string
+          format: date-time
+        lastModifiedUser:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        longName:
+          type: string
+        susyId:
+          type: integer
+          format: int32
+        description:
+          type: string
+        groups:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        productKpiCalculationMode:
+          type: string
+          enum:
+          - BEST
+          - WORST
+          - AVERAGE
+        moduleKpiFactor:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      example:
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        moduleKpiFactor:
+          key: 6.02745618307040320615897144307382404804229736328125
+        susyId: 0
+        description: description
+        groups:
+        - groups
+        - groups
+        productKpiCalculationMode: BEST
+        tags:
+        - tags
+        - tags
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: name
+        createUser: createUser
+        lastModifiedUser: lastModifiedUser
+        id: id
+        properties:
+          key: properties
+        longName: longName
+    ProductReleaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+        createUser:
+          type: string
+        lastModifiedTime:
+          type: string
+          format: date-time
+        lastModifiedUser:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        revision:
+          type: string
+        revisionPrefix:
+          type: string
+        revisionMajor:
+          type: string
+        revisionMinor:
+          type: string
+        revisionPatch:
+          type: string
+        revisionQualifier:
+          type: string
+        revisionCalculated:
+          type: string
+        kpi:
+          type: object
+          additionalProperties:
+            type: string
+        badgeURL:
+          type: string
+          format: url
+        rating:
+          type: string
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - NOT_APPLICABLE
+          - NOT_AVAILABLE
+        description:
+          type: string
+        downloadUrl:
+          type: string
+        product:
+          $ref: '#/components/schemas/ProductDto'
+        releaseManagerStatus:
+          type: string
+          enum:
+          - NEW
+          - FIELD_TEST_NOT_STARTED_YET
+          - FIELD_TEST_ACTIVE
+          - FIELD_TEST_STOPPED
+          - NOT_IN_USE_BUT_WAS_ACTIVE_ONCE
+          - ROLLOUT_NEW
+          - ROLLOUT_ACTIVE
+          - ROLLOUT_INACTIVE
+        pwnedNotes:
+          type: object
+          additionalProperties:
+            type: string
+      example:
+        badgeURL: http://example.com/aeiou
+        product:
+          lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+          moduleKpiFactor:
+            key: 6.02745618307040320615897144307382404804229736328125
+          susyId: 0
+          description: description
+          groups:
+          - groups
+          - groups
+          productKpiCalculationMode: BEST
+          tags:
+          - tags
+          - tags
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: name
+          createUser: createUser
+          lastModifiedUser: lastModifiedUser
+          id: id
+          properties:
+            key: properties
+          longName: longName
+        releaseManagerStatus: NEW
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        revisionQualifier: revisionQualifier
+        kpi:
+          key: kpi
+        rating: A
+        downloadUrl: downloadUrl
+        description: description
+        revision: revision
+        revisionCalculated: revisionCalculated
+        revisionPrefix: revisionPrefix
+        pwnedNotes:
+          key: pwnedNotes
+        revisionMinor: revisionMinor
+        createTime: 2000-01-23T04:56:07.000+00:00
+        createUser: createUser
+        lastModifiedUser: lastModifiedUser
+        id: id
+        revisionMajor: revisionMajor
+        revisionPatch: revisionPatch
+        properties:
+          key: properties
+    ModuleDto:
+      type: object
+      properties:
+        id:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+        createUser:
+          type: string
+        lastModifiedTime:
+          type: string
+          format: date-time
+        lastModifiedUser:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        description:
+          type: string
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        parentModule:
+          $ref: '#/components/schemas/ModuleDto'
+      example:
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: name
+        description: description
+        createUser: createUser
+        lastModifiedUser: lastModifiedUser
+        id: id
+        properties:
+          key: properties
+        parentModule: null
+        tags:
+        - tags
+        - tags
+    ModuleVersionDto:
+      type: object
+      properties:
+        id:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+        createUser:
+          type: string
+        lastModifiedTime:
+          type: string
+          format: date-time
+        lastModifiedUser:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        revision:
+          type: string
+        revisionPrefix:
+          type: string
+        revisionMajor:
+          type: string
+        revisionMinor:
+          type: string
+        revisionPatch:
+          type: string
+        revisionQualifier:
+          type: string
+        revisionCalculated:
+          type: string
+        kpi:
+          type: object
+          additionalProperties:
+            type: string
+        badgeURL:
+          type: string
+          format: url
+        rating:
+          type: string
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - NOT_APPLICABLE
+          - NOT_AVAILABLE
+        description:
+          type: string
+        metrics:
+          type: object
+          additionalProperties:
+            type: string
+        metricsScore:
+          type: object
+          additionalProperties:
+            type: string
+        module:
+          $ref: '#/components/schemas/ModuleDto'
+        moduleDependencies:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ModuleVersionDto'
+        productReleases:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductReleaseDto'
+      example:
+        badgeURL: http://example.com/aeiou
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        revisionQualifier: revisionQualifier
+        kpi:
+          key: kpi
+        module:
+          lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: name
+          description: description
+          createUser: createUser
+          lastModifiedUser: lastModifiedUser
+          id: id
+          properties:
+            key: properties
+          parentModule: null
+          tags:
+          - tags
+          - tags
+        rating: A
+        description: description
+        moduleDependencies:
+        - null
+        - null
+        revision: revision
+        revisionCalculated: revisionCalculated
+        metricsScore:
+          key: metricsScore
+        revisionPrefix: revisionPrefix
+        revisionMinor: revisionMinor
+        createTime: 2000-01-23T04:56:07.000+00:00
+        productReleases:
+        - badgeURL: http://example.com/aeiou
+          product:
+            lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+            moduleKpiFactor:
+              key: 6.02745618307040320615897144307382404804229736328125
+            susyId: 0
+            description: description
+            groups:
+            - groups
+            - groups
+            productKpiCalculationMode: BEST
+            tags:
+            - tags
+            - tags
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: name
+            createUser: createUser
+            lastModifiedUser: lastModifiedUser
+            id: id
+            properties:
+              key: properties
+            longName: longName
+          releaseManagerStatus: NEW
+          lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+          revisionQualifier: revisionQualifier
+          kpi:
+            key: kpi
+          rating: A
+          downloadUrl: downloadUrl
+          description: description
+          revision: revision
+          revisionCalculated: revisionCalculated
+          revisionPrefix: revisionPrefix
+          pwnedNotes:
+            key: pwnedNotes
+          revisionMinor: revisionMinor
+          createTime: 2000-01-23T04:56:07.000+00:00
+          createUser: createUser
+          lastModifiedUser: lastModifiedUser
+          id: id
+          revisionMajor: revisionMajor
+          revisionPatch: revisionPatch
+          properties:
+            key: properties
+        - badgeURL: http://example.com/aeiou
+          product:
+            lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+            moduleKpiFactor:
+              key: 6.02745618307040320615897144307382404804229736328125
+            susyId: 0
+            description: description
+            groups:
+            - groups
+            - groups
+            productKpiCalculationMode: BEST
+            tags:
+            - tags
+            - tags
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: name
+            createUser: createUser
+            lastModifiedUser: lastModifiedUser
+            id: id
+            properties:
+              key: properties
+            longName: longName
+          releaseManagerStatus: NEW
+          lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+          revisionQualifier: revisionQualifier
+          kpi:
+            key: kpi
+          rating: A
+          downloadUrl: downloadUrl
+          description: description
+          revision: revision
+          revisionCalculated: revisionCalculated
+          revisionPrefix: revisionPrefix
+          pwnedNotes:
+            key: pwnedNotes
+          revisionMinor: revisionMinor
+          createTime: 2000-01-23T04:56:07.000+00:00
+          createUser: createUser
+          lastModifiedUser: lastModifiedUser
+          id: id
+          revisionMajor: revisionMajor
+          revisionPatch: revisionPatch
+          properties:
+            key: properties
+        createUser: createUser
+        lastModifiedUser: lastModifiedUser
+        id: id
+        revisionMajor: revisionMajor
+        metrics:
+          key: metrics
+        revisionPatch: revisionPatch
+        properties:
+          key: properties
+    AddressStandardClaim:
+      type: object
+      properties:
+        region:
+          type: string
+        country:
+          type: string
+        streetAddress:
+          type: string
+        postalCode:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+    OidcIdToken:
+      type: object
+      properties:
+        tokenValue:
+          type: string
+        issuedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        claims:
+          type: object
+          additionalProperties:
+            type: object
+        audience:
+          type: array
+          items:
+            type: string
+        subject:
+          type: string
+        authorizedParty:
+          type: string
+        accessTokenHash:
+          type: string
+        authenticationContextClass:
+          type: string
+        authenticationMethods:
+          type: array
+          items:
+            type: string
+        authorizationCodeHash:
+          type: string
+        issuer:
+          type: string
+          format: url
+        authenticatedAt:
+          type: string
+          format: date-time
+        nonce:
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressStandardClaim'
+        locale:
+          type: string
+        fullName:
+          type: string
+        zoneInfo:
+          type: string
+        email:
+          type: string
+        preferredUsername:
+          type: string
+        phoneNumberVerified:
+          type: boolean
+        givenName:
+          type: string
+        familyName:
+          type: string
+        middleName:
+          type: string
+        nickName:
+          type: string
+        picture:
+          type: string
+        website:
+          type: string
+        emailVerified:
+          type: boolean
+        gender:
+          type: string
+        birthdate:
+          type: string
+        phoneNumber:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        profile:
+          type: string
+    LoginRequestDto:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    ModuleVersionImportDto:
+      required:
+      - metrics
+      type: object
+      properties:
+        moduleName:
+          type: string
+        version:
+          type: string
+        description:
+          type: string
+        moduleTags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        metrics:
+          type: object
+          additionalProperties:
+            type: string
+    ProductReleaseImportDto:
+      type: object
+      properties:
+        productName:
+          type: string
+        productLongName:
+          type: string
+        susyId:
+          type: integer
+          format: int32
+        version:
+          type: string
+        description:
+          type: string
+        productTags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        downloadUrl:
+          type: string
+        releaseCreateTime:
+          type: string
+          format: date-time
+        releaseCreateUser:
+          type: string
+        moduleVersionImportDtoSet:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ModuleVersionImportDto'
+    SonarBranchDto:
+      type: object
+      properties:
+        branch:
+          type: string
+        status:
+          type: string
+        ts:
+          type: integer
+          format: int32
+        tsOrig:
+          type: string
+        metrics:
+          $ref: '#/components/schemas/SonarMetricsDto'
+        badge:
+          type: string
+        version:
+          type: string
+        revision:
+          type: string
+      example:
+        badge: badge
+        metrics:
+          coverage: null
+          bugs:
+            rating: rating
+            value: 1.46581298050294517310021547018550336360931396484375
+          duplicated_lines_density: null
+          code_smells: null
+          sqale: null
+          ncloc: null
+          vulnerabilities: null
+        tsOrig: tsOrig
+        branch: branch
+        version: version
+        status: status
+        ts: 6
+        revision: revision
+    SonarDto:
+      type: object
+      properties:
+        sonar:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SonarProjectDto'
+      example:
+        sonar:
+          key:
+            name: name
+            branches:
+            - badge: badge
+              metrics:
+                coverage: null
+                bugs:
+                  rating: rating
+                  value: 1.46581298050294517310021547018550336360931396484375
+                duplicated_lines_density: null
+                code_smells: null
+                sqale: null
+                ncloc: null
+                vulnerabilities: null
+              tsOrig: tsOrig
+              branch: branch
+              version: version
+              status: status
+              ts: 6
+              revision: revision
+            - badge: badge
+              metrics:
+                coverage: null
+                bugs:
+                  rating: rating
+                  value: 1.46581298050294517310021547018550336360931396484375
+                duplicated_lines_density: null
+                code_smells: null
+                sqale: null
+                ncloc: null
+                vulnerabilities: null
+              tsOrig: tsOrig
+              branch: branch
+              version: version
+              status: status
+              ts: 6
+              revision: revision
+            ts: 0
+    SonarMetricsDto:
+      type: object
+      properties:
+        bugs:
+          $ref: '#/components/schemas/SonarRatingDto'
+        sqale:
+          $ref: '#/components/schemas/SonarRatingDto'
+        duplicated_lines_density:
+          $ref: '#/components/schemas/SonarRatingDto'
+        vulnerabilities:
+          $ref: '#/components/schemas/SonarRatingDto'
+        coverage:
+          $ref: '#/components/schemas/SonarRatingDto'
+        code_smells:
+          $ref: '#/components/schemas/SonarRatingDto'
+        ncloc:
+          $ref: '#/components/schemas/SonarRatingDto'
+      example:
+        coverage: null
+        bugs:
+          rating: rating
+          value: 1.46581298050294517310021547018550336360931396484375
+        duplicated_lines_density: null
+        code_smells: null
+        sqale: null
+        ncloc: null
+        vulnerabilities: null
+    SonarProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        ts:
+          type: integer
+          format: int32
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/SonarBranchDto'
+      example:
+        name: name
+        branches:
+        - badge: badge
+          metrics:
+            coverage: null
+            bugs:
+              rating: rating
+              value: 1.46581298050294517310021547018550336360931396484375
+            duplicated_lines_density: null
+            code_smells: null
+            sqale: null
+            ncloc: null
+            vulnerabilities: null
+          tsOrig: tsOrig
+          branch: branch
+          version: version
+          status: status
+          ts: 6
+          revision: revision
+        - badge: badge
+          metrics:
+            coverage: null
+            bugs:
+              rating: rating
+              value: 1.46581298050294517310021547018550336360931396484375
+            duplicated_lines_density: null
+            code_smells: null
+            sqale: null
+            ncloc: null
+            vulnerabilities: null
+          tsOrig: tsOrig
+          branch: branch
+          version: version
+          status: status
+          ts: 6
+          revision: revision
+        ts: 0
+    SonarRatingDto:
+      type: object
+      properties:
+        rating:
+          type: string
+        value:
+          type: number
+          format: double
+      example:
+        rating: rating
+        value: 1.46581298050294517310021547018550336360931396484375
+    PingDto:
+      type: object
+      properties:
+        pong:
+          type: boolean
+        schedule_ts:
+          type: number
+          format: double
+      example:
+        schedule_ts: 0.80082819046101150206595775671303272247314453125
+        pong: true
+    AuthInfoVM:
+      required:
+      - clientId
+      - issuer
+      type: object
+      properties:
+        issuer:
+          type: string
+        clientId:
+          type: string
+      example:
+        clientId: clientId
+        issuer: issuer
+    AdminUserDto:
+      required:
+      - authorities
+      - login
+      type: object
+      properties:
+        id:
+          type: string
+        login:
+          maxLength: 50
+          minLength: 1
+          pattern: "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
+          type: string
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        email:
+          maxLength: 254
+          minLength: 5
+          type: string
+        imageUrl:
+          maxLength: 256
+          minLength: 0
+          type: string
+        activated:
+          type: boolean
+        langKey:
+          maxLength: 10
+          minLength: 2
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        authorities:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      example:
+        lastName: lastName
+        lastModifiedDate: 2000-01-23T04:56:07.000+00:00
+        lastModifiedBy: lastModifiedBy
+        login: login
+        authorities:
+        - authorities
+        - authorities
+        firstName: firstName
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        langKey: langKey
+        createdBy: createdBy
+        imageUrl: imageUrl
+        id: id
+        email: email
+        activated: true
+  securitySchemes:
+    oauth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://auth.sma.dev/realms/tdc/protocol/openid-connect/auth?nonce="asdf"
+          tokenUrl: https://auth.sma.dev/realms/tdc/protocol/openid-connect/token
+          refreshUrl: https://auth.sma.dev/realms/tdc/protocol/openid-connect/token
+          scopes: {}
